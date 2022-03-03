@@ -31,18 +31,7 @@ The most popular hashtag including the word `covid` was `#covid19`, which makes 
 
 As for the three hashtags in Korean, Japanese, and Chinese, the top language and country were, as expected, Korean and Korea respectively for `#코로나바이러스` and Japanese and Japan respectively for `#コロナウイルス`. However, while the top language for `#冠状病毒` was Chinese, the top country was Yemen, followed by China. Twitter has been blocked in China since 2009, which could account for some of the reason as to why the top country for the Chinese hashtag is somewhere other than China.
 
-**Due date:** 
-Sunday, 6 March.
-
-This homework will require LOTs of computation time.
-I recommend that you have your code working by **21 Mar** to ensure that you will have enough time to execute the code.
-No extensions will be granted for any reason.
-
-You will continue to have assignments during the next few weeks,
-and so if you delay working on this homework,
-you will have some very heavy work loads ahead of you.
-
-**Learning Objectives:**
+*Learning Objectives:**
 
 1. work with large scale datasets
 1. work with multilingual text

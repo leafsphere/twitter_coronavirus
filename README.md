@@ -1,9 +1,38 @@
 # Coronavirus twitter analysis
 
-You will scan all geotagged tweets sent in 2020 to monitor for the spread of the coronavirus on social media.
+You will scan all geotagged tweets sent in in 2020 to monitor for the spread of the coronavirus on social media.
+
+## Summary and Results
+Running `map.py` on all geotagged tweets produced a corresponding `.lang` and `.country` file for each day, containing JSON formatted information about the number of times a Covid-19 related hashtag was used in the top 10 languages and countries supported by Twitter, respectively. The hashtags that were tracked include: 
+
+|     hashtag      |
+|     :----        |
+|`#코로나바이러스` |
+|`#コロナウイルス` |
+|`#冠状病毒`       |
+|`#covid2019`      |
+|`#covid-2019`     |
+|`#covid19`        |
+|`#covid-19`       |
+|`#coronavirus`    |
+|`#corona`         |
+|`#virus`          |
+|`#flu`            |
+|`#sick`           |
+|`#cough`          |
+|`#sneeze`         |
+|`#hospital`       |
+|`#nurse`          |
+|`#doctor`         |
+
+To analyze geotagged tweets sent in 2020, I ran `./src/reduce.py` on the files matching on `geoTwitter20-*.lang` and `geoTwitter20-*.country` to get `reduced.lang` and `reduced.country` respectively. Then, I ran `./src/visualize.py` to get a corresponding language and country file detailing how many times each of the 17 hashtags were used in a geotagged tweet in the top 10 supported languages or countries.
+
+The most popular hashtag including the word `covid` was `#covid19`, which makes sense since Covid-19 is the currently most common colloquialism for the virus, and it's also more convenient to use instead of fully typing out `#covid-19` with the hyphen. Surprisingly, `#covid2019` was still used more than twice as much as `#covid-19` was.
+
+As for the three hashtags in Korean, Japanese, and Chinese, the top language and country were, as expected, Korean and Korea respectively for `#코로나바이러스` and Japanese and Japan respectively for `#コロナウイルス`. However, while the top language for `#冠状病毒` was Chinese, the top country was Yemen, followed by China. Twitter has been blocked in China since 2009, which could account for some of the reason as to why the top country for the Chinese hashtag is somewhere other than China.
 
 **Due date:** 
-Sunday, 11 April.
+Sunday, 6 March.
 
 This homework will require LOTs of computation time.
 I recommend that you have your code working by **21 Mar** to ensure that you will have enough time to execute the code.

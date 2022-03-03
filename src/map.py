@@ -37,6 +37,7 @@ hashtags = [
 
 # initialize counters
 counter_lang = defaultdict(lambda: Counter())
+counter_country = defaultdict(lambda: Counter())
 
 # open the zipfile
 with zipfile.ZipFile(args.input_path) as archive:
@@ -52,17 +53,42 @@ with zipfile.ZipFile(args.input_path) as archive:
             for line in f:
 
                 # load the tweet as a python dictionary
-                tweet = json.loads(line)
+                try:
+                    tweet = json.loads(line)
 
-                # convert text to lower case
-                text = tweet['text'].lower()
+                    # guard against empty tweets
+                    try:
+                        # convert text to lower case
+                        text = tweet['text'].lower()
+                    except:
+                        text = ''
+                
+                    # search hashtags
+                    for hashtag in hashtags:
 
-                # search hashtags
-                for hashtag in hashtags:
-                    lang = tweet['lang']
-                    if hashtag in text:
-                        counter_lang[hashtag][lang] += 1
-                    counter_lang['_all'][lang] += 1
+                        # guard against unknown languages
+                        if 'lang' not in tweet:
+                            lang = 'unknown'
+                        else:
+                            lang = tweet['lang']
+                    
+                        # guard against unknown location
+                        if 'place' not in tweet or tweet['place'] is None or 'country_code' not in tweet['place']:
+                            place = 'other'
+                        else: # 'country_code' in tweet['place']:
+                            if tweet['place']['country_code'] == '':
+                                place = 'other'
+                            else:
+                                place = tweet['place']['country_code']
+                    
+                        # count hashtags
+                        if hashtag in text:
+                            counter_lang[hashtag][lang] += 1
+                            counter_country[hashtag][place] += 1
+                        counter_lang['_all'][lang] += 1
+                        counter_country['_all'][place] += 1
+                except:
+                    continue
 
 # open the outputfile
 try:
@@ -76,3 +102,7 @@ print('saving',output_path_lang)
 with open(output_path_lang,'w') as f:
     f.write(json.dumps(counter_lang))
 
+output_path_country = output_path_base+'.country'
+print('saving',output_path_country)
+with open(output_path_country,'w') as g:
+    g.write(json.dumps(counter_country))
